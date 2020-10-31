@@ -2,7 +2,7 @@
 Spooky with pointers.
 
 ## How do I program this?
-Read the test cases in the `tests` directory for some example code. Or read the source code of the compile for a more in-depth look.
+Read the test cases in the `tests` directory for some example code. Or read the source code of the compiler for a more in-depth look.
 
 The language is largely unfinished and has a couple of known bugs.
 
