@@ -1,0 +1,63 @@
+// https://github.com/c-testsuite/c-testsuite/blob/master/tests/single-exec/00017.c
+// Circular reference
+================
+Basic Struct
+================
+extern printInt(n: Int)
+
+struct Test {
+	x: Int;
+	y: Int;
+}
+
+func main() {
+	s: Test;
+	s.x = 5;
+	s.y = 10;
+	
+	printInt(s.x + s.y);
+}
+
+----------------
+15
+================
+Child Structs
+================
+extern printInt(n: Int)
+extern print(c: Char)
+
+struct Vec2 {
+	x: Int;
+	y: Int;
+}
+
+struct Line {
+	a: Vec2;
+	b: Vec2;
+}
+
+func printVec(v: *Vec2) {
+	print('(');
+	printInt((*v).x);
+	print(',');
+	printInt((*v).y);
+	print(')');
+}
+
+func main() {
+	line: Line;
+	line.a.x = 10;
+	line.a.y = 15;
+	line.b.x = 20;
+	line.b.y = 25;
+	
+	printVec(&line.a);
+	printVec(&line.b);
+}
+----------------
+(10,15)(20,25)
+================
+// Circular Struct
+================
+func main() {}
+----------------

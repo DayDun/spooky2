@@ -1,0 +1,87 @@
+name: "Spooky"
+scopeName: "source.spooky"
+type: "tree-sitter"
+parser: "tree-sitter-spooky"
+
+fileTypes: ["spooky", "spooky2"]
+
+comments:
+	start: "// "
+
+folds: [
+	{
+		type: "comment"
+	},
+	{
+		start: {index: 0, type: "{"}
+		end: {index: -1, type: "}"}
+	}
+	{
+		start: {index: 0, type: "["}
+		end: {index: -1, type: "]"}
+	}
+	{
+		start: {index: 0, type: "("}
+		end: {index: -1, type: ")"}
+	}
+]
+
+scopes:
+	"program": "source.spooky"
+	
+	"function > identifier": "entity.name.function"
+	
+	"identifier": [
+		{
+			match: "^[\$A-Z_]{2,}$",
+			scopes: "constant.other"
+		},
+		{
+			match: "^[A-Z]",
+			scopes: "support.type"
+		}
+	]
+	
+	'"("': "punctuation.definition.parameters.begin.bracket.round"
+	'")"': "punctuation.definition.parameters.end.bracket.round"
+	'"{"': "punctuation.definition.function.body.begin.bracket.curly"
+	'"}"': "punctuation.definition.function.body.end.bracket.curly"
+	'";"': "punctuation.terminator.statement.semicolon"
+	'"["': "punctuation.definition.array.begin.bracket.square"
+	'"]"': "punctuation.definition.array.end.bracket.square"
+	
+	'"extern"': "storage.other"
+	'"func"': "storage.type.function"
+	'"struct"': "storage.type"
+	
+	'"if"': "keyword.control"
+	'"else"': "keyword.control"
+	'"while"': "keyword.control"
+	'"do"': "keyword.control"
+	'"for"': "keyword.control"
+	'"continue"': "keyword.control"
+	'"break"': "keyword.control"
+	'"return"': "keyword.control"
+	'"halt"': "keyword.control"
+	
+	"integer": "constant.numeric"
+	'"true"': "constant.language.boolean.true"
+	'"false"': "constant.language.boolean.false"
+	"string": "string.quoted"
+	"escape_sequence": "constant.character.escape"
+	"line_comment": "comment.line"
+	"block_comment": "comment.line"
+	
+	'":"': "keyword.operator"
+	'"->"': "keyword.operator"
+	'"="': "keyword.operator"
+	'"=="': "keyword.operator"
+	'"<"': "keyword.operator"
+	'">"': "keyword.operator"
+	'"<="': "keyword.operator"
+	'">="': "keyword.operator"
+	'"+"': "keyword.operator"
+	'"-"': "keyword.operator"
+	'"*"': "keyword.operator"
+	'"/"': "keyword.operator"
+	'"%"': "keyword.operator"

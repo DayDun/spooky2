@@ -1,0 +1,67 @@
+================
+Fibonacci
+================
+extern printInt(n: Int)
+
+func fib(n: Int) -> Int {
+	if (n < 2) return n;
+	return fib(n - 1) + fib(n - 2);
+}
+
+func main() {
+	n: Int = fib(20);
+	printInt(n);
+}
+
+----------------
+6765
+================
+Scope shadowing
+================
+extern printInt(n: Int)
+
+func main() {
+	x := 0;
+	printInt(x);
+	
+	{
+		x := 1;
+		printInt(x);
+	}
+	
+	printInt(x);
+}
+
+----------------
+010
+================
+Call in expression
+================
+extern printInt(n: Int)
+
+func f() -> Int {
+	return 4321;
+}
+
+func main() {
+	if (f() == 4322) printInt(3);
+	else printInt(f());
+}
+----------------
+4321
+================
+Argument order
+================
+extern printInt(n: Int)
+
+func f(a: Int, b: Int, c: Int) {
+	printInt(a);
+	printInt(b);
+	printInt(c);
+}
+
+func main() {
+	f(1, 2, 3);
+}
+----------------
+123

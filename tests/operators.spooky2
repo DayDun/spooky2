@@ -1,0 +1,126 @@
+================
+Comparison
+================
+extern printInt(n: Int)
+extern print(c: Char)
+
+func printIntLn(n: Int) {
+	printInt(n);
+	print(' ');
+}
+
+func main() {
+	a: Int = 10 < 11; printIntLn(a);
+	b: Int = 11 < 11; printIntLn(b);
+	c: Int = 11 <= 11; printIntLn(c);
+	d: Int = 12 <= 11; printIntLn(d);
+	e: Int = 12 > 11; printIntLn(e);
+	f: Int = 11 > 11; printIntLn(f);
+	g: Int = 11 >= 11; printIntLn(g);
+	h: Int = 10 >= 11; printIntLn(h);
+	i: Int = 11 == 11; printIntLn(i);
+	j: Int = 10 == 11; printIntLn(j);
+}
+
+----------------
+1 0 1 0 1 0 1 0 1 0
+================
+Arithmetic
+================
+extern printInt(n: Int)
+extern print(c: Char)
+
+func printIntLn(n: Int) {
+	printInt(n);
+	print(' ');
+}
+
+func main() {
+	a := 20;
+	b := 3;
+	
+	printIntLn(a + b);
+	printIntLn(a - b);
+	printIntLn(a * b);
+	printIntLn(a / b);
+	printIntLn(a % b);
+}
+
+----------------
+23 17 60 6 2
+================
+Compound assignment
+================
+extern printInt(n: Int)
+
+func main() {
+	a := 20;
+	
+	a += 1;
+	a *= 6;
+	a /= 2;
+	a %= 50;
+	
+	printInt(a);
+}
+
+----------------
+13
+================
+Increment
+================
+extern printInt(n: Int)
+extern print(c: Char)
+
+func printIntLn(n: Int) {
+	printInt(n);
+	print(' ');
+}
+
+func main() {
+	i: Int = 0;
+	printIntLn(i++);
+	printIntLn(i++);
+	printIntLn(++i);
+}
+
+----------------
+0 1 3
+================
+Assignment expression
+================
+extern printInt(n: Int)
+
+func main() {
+	a: Int;
+	b: Int;
+	
+	a = b = 20;
+	
+	printInt(a);
+	printInt(b);
+}
+
+----------------
+2020
+================
+Side effect compunds
+================
+extern printInt(n: Int)
+
+func main() {
+	x: *Int = 100;
+	*x = 400;
+	
+	++(*(f() + 1)) += 5;
+	
+	printInt(*x);
+}
+
+func f() -> *Int {
+	printInt(123);
+	out: *Int = 99;
+	return out;
+}
+----------------
+123406

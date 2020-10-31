@@ -1,0 +1,204 @@
+// https://github.com/c-testsuite/c-testsuite/blob/master/tests/single-exec/00005.c
+================
+Basic
+================
+extern printInt(n: Int)
+extern print(c: Char)
+
+func main() {
+	a: Int = 5;
+	b: Int = 10;
+	printInt(*&a + *&b);
+}
+
+----------------
+15
+================
+Pointer subscript
+================
+extern printInt(n: Int)
+extern print(c: Char)
+
+func main() {
+	n: Int = 123;
+	p: *Int = &n;
+	printInt(p[0]);
+}
+
+----------------
+123
+================
+Subscript assignment
+================
+extern printInt(n: Int)
+extern print(c: Char)
+
+func main() {
+	n: Int = 123;
+	p: *Int = &n;
+	p[0] = 456;
+	printInt(n);
+}
+
+----------------
+456
+================
+Stack magic
+================
+extern printInt(n: Int)
+extern print(c: Char)
+
+func main() {
+	a: Int = 0;
+	b: Int = 0;
+	printInt(a + b);
+	print(' ');
+	*(&a + 1) = 1;
+	printInt(a);
+	print(' ');
+	printInt(b);
+}
+
+----------------
+0 0 1
+================
+Reference
+================
+extern printInt(n: Int)
+extern print(c: Char)
+
+func main() {
+	a: Int = 0;
+	printInt(a);
+	print(' ');
+	test(&a);
+	printInt(a);
+}
+
+func test(n: *Int) {
+	*n = *n + 1;
+	*n = *n + 1;
+}
+
+----------------
+0 2
+================
+Multi pointers
+================
+extern printInt(n: Int)
+extern print(c: Char)
+
+func main() {
+	a: Int;
+	b: *Int;
+	c: **Int;
+	d: ***Int;
+	
+	a = 10;
+	b = &a;
+	c = &b;
+	d = &c;
+	
+	printInt(a);
+	print(' ');
+	printInt(*b);
+	print(' ');
+	printInt(**c);
+	print(' ');
+	printInt(***d);
+}
+
+----------------
+10 10 10 10
+================
+Array reference
+================
+extern printInt(n: Int)
+
+func main() {
+	arr: [2]Int;
+	p: *Int = &arr[1];
+	
+	*p = 543;
+	printInt(arr[1]);
+}
+
+----------------
+543
+================
+3D array
+================
+extern printInt(n: Int)
+extern print(c: Char)
+
+func printArr(arr: *[3][3]Int) {
+	for (z := 0; z < 3; z++) {
+		for (y := 0; y < 3; y++) {
+			for (x := 0; x < 3; x++) {
+				printInt(arr[z][y][x]);
+				print(' ');
+			}
+		}
+	}
+}
+
+func main() {
+	arr: [3][3][3]Int;
+	
+	i: Int = 0;
+	
+	for (z := 0; z < 3; z++) {
+		for (y := 0; y < 3; y++) {
+			for (x := 0; x < 3; x++) {
+				arr[z][y][x] = i++;
+			}
+		}
+	}
+	
+	printArr(arr);
+}
+
+----------------
+0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26
+================
+String map
+================
+extern printInt(n: Int)
+extern print(c: Char)
+
+func map(fn: (Char) -> Char, str: String) {
+	while (*str) {
+		*str = fn(*str);
+		
+		++str;
+	}
+}
+
+func printStr(str: String) {
+	while (*str) {
+		print(*str++);
+	}
+}
+
+func strcpy(old: String, new: String) {
+	while (*old) {
+		*new++ = *old++;
+	}
+}
+
+func upper(c: Char) -> Char {
+	if (c >= 'a') return c - ('a' - 'A');
+	return c;
+}
+
+func main() {
+	str :: "Hello World!";
+	copy: [13]Char;
+	
+	strcpy(str, copy);
+	map(upper, copy);
+	printStr(copy);
+}
+
+----------------
+HELLO WORLD!

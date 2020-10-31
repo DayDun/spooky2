@@ -1,0 +1,93 @@
+================
+While loop
+================
+extern printInt(n: Int)
+
+func main() {
+	x := 0;
+	
+	while (x < 50) {
+		x++;
+	}
+	
+	printInt(x);
+}
+
+----------------
+50
+================
+For loop
+================
+
+extern print(c: Char)
+extern printInt(n: Int)
+
+func main() {
+	x := 1;
+	
+	for (x = 10; x; x--) {}
+	
+	printInt(x);
+	print(' ');
+	
+	x = 10;
+	for (;x;) x--;
+	
+	printInt(x);
+}
+
+----------------
+0 0
+================
+Do while
+================
+
+extern printInt(i: Int)
+
+func main() {
+	x := 5;
+	
+	do {
+		x *= 10;
+	} while (x < 0);
+	
+	printInt(x);
+}
+
+----------------
+50
+================
+Continue, break
+================
+
+extern printInt(i: Int)
+
+func main() {
+	for (i := 0; i < 10; i++) {
+		if (i < 3) continue;
+		if (i > 8) break;
+		
+		printInt(i);
+	}
+}
+
+/*extern printInt(i: Int)
+
+func main() {
+	:start:
+		goto next;
+		return;
+	:success:
+		printInt(123);
+		return;
+	:next:
+	:foo:
+		goto success;
+		return;
+}
+
+123
+*/
+
+----------------
+345678
